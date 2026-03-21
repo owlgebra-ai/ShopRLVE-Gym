@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""ShopRLVE-GYM OpenEnv RL Training Script.
+"""EcomRLVE-GYM OpenEnv RL Training Script.
 
 Trains a language model to act as an e-commerce shopping assistant using
-Reinforcement Learning (GRPO) with ShopRLVE-GYM environments as the
+Reinforcement Learning (GRPO) with EcomRLVE-GYM environments as the
 reward signal.  Follows the Unsloth + TRL GRPOTrainer pattern from the
 OpenEnv 2048 notebook, adapted for multi-turn e-commerce conversation.
 
@@ -18,7 +18,7 @@ Usage:
         --lora_rank 16 \
         --num_generations 4 \
         --load_in_4bit \
-        --output_dir outputs/shoprlve_grpo
+        --output_dir outputs/ecomrlve_grpo
 
 Requires: pip install unsloth trl transformers datasets torch
 """
@@ -38,7 +38,7 @@ import numpy as np
 import torch
 
 # ---------------------------------------------------------------------------
-# Ensure shop_rlve is importable (add src/ to path if needed)
+# Ensure ecom_rlve is importable (add src/ to path if needed)
 # ---------------------------------------------------------------------------
 _SCRIPT_DIR = Path(__file__).resolve().parent
 _PROJECT_ROOT = _SCRIPT_DIR.parent
@@ -46,15 +46,15 @@ _SRC_DIR = _PROJECT_ROOT / "src"
 if str(_SRC_DIR) not in sys.path:
     sys.path.insert(0, str(_SRC_DIR))
 
-from shop_rlve.server.openenv import ShopRLVEEnv
-from shop_rlve.server.state import parse_action
-from shop_rlve.training.collections import COLLECTIONS, get_collection
+from ecom_rlve.server.openenv import EcomRLVEEnv
+from ecom_rlve.server.state import parse_action
+from ecom_rlve.training.collections import COLLECTIONS, get_collection
 
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
 )
-logger = logging.getLogger("shoprlve.train_openenv")
+logger = logging.getLogger("ecomrlve.train_openenv")
 
 
 # ===================================================================
@@ -92,11 +92,11 @@ When you have found the answer, set "done": true in the answer field.\
 
 
 # ===================================================================
-# Environment wrapper — one persistent ShopRLVEEnv instance
+# Environment wrapper — one persistent EcomRLVEEnv instance
 # ===================================================================
 
-class ShopRLVEOpenEnv:
-    """Thin wrapper around ShopRLVEEnv that stores state for reward
+class EcomRLVEOpenEnv:
+    """Thin wrapper around EcomRLVEEnv that stores state for reward
     computation across the GRPO generate → reward pipeline.
 
     GRPOTrainer generates completions first, then calls reward functions.
@@ -106,7 +106,7 @@ class ShopRLVEOpenEnv:
     """
 
     def __init__(self, collection: str = "C1", seed: int = 42) -> None:
-        self.env = ShopRLVEEnv(collection=collection, seed=seed)
+        self.env = EcomRLVEEnv(collection=collection, seed=seed)
         self.env.dump_dir = ""       # Disable disk trace during training
         self.env.trace_episodes = False
         self.env.validate_rewards = True
@@ -205,7 +205,7 @@ class ShopRLVEOpenEnv:
 # ===================================================================
 
 # Global env wrapper -- initialized in main()
-_OPENENV: ShopRLVEOpenEnv | None = None
+_OPENENV: EcomRLVEOpenEnv | None = None
 _PRINT_COUNTER: int = 0
 
 
@@ -244,7 +244,7 @@ def _extract_json_from_completion(text: str) -> str | None:
 
 
 def format_reward(completions: list[list[dict[str, str]]], **kwargs: Any) -> list[float]:
-    """Reward: does the completion parse as valid ShopRLVE action JSON?
+    """Reward: does the completion parse as valid EcomRLVE action JSON?
 
     Checks that the output contains a valid JSON object with the
     required 'assistant_message' field.
@@ -312,7 +312,7 @@ def tool_usage_reward(completions: list[list[dict[str, str]]], **kwargs: Any) ->
 
 
 def env_reward(completions: list[list[dict[str, str]]], **kwargs: Any) -> list[float]:
-    """Reward: run the completion through the ShopRLVE-GYM environment
+    """Reward: run the completion through the EcomRLVE-GYM environment
     and return the environment's scalar reward.
 
     This is the core reward that evaluates actual e-commerce task
@@ -327,7 +327,7 @@ def env_reward(completions: list[list[dict[str, str]]], **kwargs: Any) -> list[f
     to make it the dominant signal.
     """
     global _OPENENV, _PRINT_COUNTER
-    assert _OPENENV is not None, "ShopRLVEOpenEnv not initialized"
+    assert _OPENENV is not None, "EcomRLVEOpenEnv not initialized"
 
     # Extract episode identifiers from kwargs (set in the dataset)
     env_ids = kwargs.get("env_id", [])
@@ -387,11 +387,11 @@ def env_reward(completions: list[list[dict[str, str]]], **kwargs: Any) -> list[f
 # ===================================================================
 
 def build_dataset(
-    openenv: ShopRLVEOpenEnv,
+    openenv: EcomRLVEOpenEnv,
     tokenizer: Any,
     n_prompts: int = 1000,
 ) -> "Dataset":
-    """Build a HuggingFace Dataset of prompts sampled from ShopRLVE-GYM.
+    """Build a HuggingFace Dataset of prompts sampled from EcomRLVE-GYM.
 
     Each row has:
         - 'prompt':        list of chat messages for apply_chat_template()
@@ -428,7 +428,7 @@ def build_dataset(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="ShopRLVE-GYM OpenEnv RL Training with GRPO",
+        description="EcomRLVE-GYM OpenEnv RL Training with GRPO",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     # Model
@@ -504,8 +504,8 @@ def parse_args() -> argparse.Namespace:
 
     # Output
     parser.add_argument(
-        "--output_dir", type=str, default="outputs/shoprlve_grpo",
-        help="Checkpoint output directory (default: outputs/shoprlve_grpo)",
+        "--output_dir", type=str, default="outputs/ecomrlve_grpo",
+        help="Checkpoint output directory (default: outputs/ecomrlve_grpo)",
     )
     parser.add_argument(
         "--save_steps", type=int, default=50,
@@ -524,7 +524,7 @@ def main() -> None:
     args = parse_args()
 
     logger.info("=" * 70)
-    logger.info("ShopRLVE-GYM OpenEnv Training")
+    logger.info("EcomRLVE-GYM OpenEnv Training")
     logger.info("=" * 70)
     logger.info("Model:      %s", args.model)
     logger.info("Collection: %s -> %s", args.collection, get_collection(args.collection))
@@ -536,11 +536,11 @@ def main() -> None:
     logger.info("=" * 70)
 
     # ------------------------------------------------------------------
-    # 1. Initialize ShopRLVE-GYM environment
+    # 1. Initialize EcomRLVE-GYM environment
     # ------------------------------------------------------------------
-    logger.info("Initializing ShopRLVE-GYM environment (collection=%s)...", args.collection)
+    logger.info("Initializing EcomRLVE-GYM environment (collection=%s)...", args.collection)
     global _OPENENV
-    _OPENENV = ShopRLVEOpenEnv(collection=args.collection, seed=args.seed)
+    _OPENENV = EcomRLVEOpenEnv(collection=args.collection, seed=args.seed)
     logger.info(
         "Environment ready: %d envs, catalog loaded",
         len(_OPENENV.env_ids),
@@ -660,12 +660,12 @@ def main() -> None:
     )
 
     # ------------------------------------------------------------------
-    # 5. Create trainer with ShopRLVE reward functions
+    # 5. Create trainer with EcomRLVE reward functions
     # ------------------------------------------------------------------
     logger.info("Creating GRPOTrainer with 3 reward functions...")
     logger.info("  1. format_reward:     valid JSON action format check")
     logger.info("  2. tool_usage_reward: correct tool names & structure")
-    logger.info("  3. env_reward:        ShopRLVE-GYM environment reward (×5)")
+    logger.info("  3. env_reward:        EcomRLVE-GYM environment reward (×5)")
 
     trainer = GRPOTrainer(
         model=model,

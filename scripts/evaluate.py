@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""ShopRLVE Evaluation Script -- compare performance across collections.
+"""EcomRLVE Evaluation Script -- compare performance across collections.
 
 Usage:
     python scripts/evaluate.py --episodes 50 --seed 42
@@ -28,9 +28,9 @@ import numpy as np
 from rich.console import Console
 from rich.table import Table
 
-from shop_rlve.server.openenv import ShopRLVEEnv
-from shop_rlve.training.collections import COLLECTIONS, get_collection
-from shop_rlve.training.rollout import DummyModelFn, RolloutResult, run_rollout
+from ecom_rlve.server.openenv import EcomRLVEEnv
+from ecom_rlve.training.collections import COLLECTIONS, get_collection
+from ecom_rlve.training.rollout import DummyModelFn, RolloutResult, run_rollout
 
 logger = logging.getLogger(__name__)
 console = Console()
@@ -53,7 +53,7 @@ def evaluate_collection(
             n_episodes, mean_reward, std_reward, success_rate,
             mean_turns, hallucination_rate.
     """
-    env = ShopRLVEEnv(collection=collection, seed=seed)
+    env = EcomRLVEEnv(collection=collection, seed=seed)
     env.dump_dir = ""
 
     env_ids = get_collection(collection)
@@ -205,7 +205,7 @@ def run_evaluation(
 def main() -> None:
     """Entry point."""
     parser = argparse.ArgumentParser(
-        description="ShopRLVE Evaluation Script",
+        description="EcomRLVE Evaluation Script",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )

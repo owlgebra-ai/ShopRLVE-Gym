@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""ShopRLVE Debug CLI -- main entry point for environment debugging.
+"""EcomRLVE Debug CLI -- main entry point for environment debugging.
 
 Usage:
     python scripts/run_debug.py probe --env PD --difficulty 3 --episodes 20
@@ -33,7 +33,7 @@ console = Console()
 
 def cmd_probe(args: argparse.Namespace) -> None:
     """Run probe_env() and print results."""
-    from shop_rlve.debug.replay import probe_env
+    from ecom_rlve.debug.replay import probe_env
 
     console.print(
         f"[bold cyan]Probing[/bold cyan] env=[bold]{args.env}[/bold] "
@@ -77,9 +77,9 @@ def cmd_probe(args: argparse.Namespace) -> None:
 
 def cmd_validate(args: argparse.Namespace) -> None:
     """Run solvability validation."""
-    from shop_rlve.data.catalog_loader import generate_synthetic_catalog
-    from shop_rlve.debug.validators import validate_all_envs, validate_env_solvability
-    from shop_rlve.envs.base import get_env
+    from ecom_rlve.data.catalog_loader import generate_synthetic_catalog
+    from ecom_rlve.debug.validators import validate_all_envs, validate_env_solvability
+    from ecom_rlve.envs.base import get_env
 
     console.print("[bold cyan]Generating synthetic catalog...[/bold cyan]")
     products, _ = generate_synthetic_catalog(n_products=500, seed=args.seed)
@@ -151,9 +151,9 @@ def cmd_validate(args: argparse.Namespace) -> None:
 
 def cmd_episode(args: argparse.Namespace) -> None:
     """Run one episode with DummyModelFn and show full trace."""
-    from shop_rlve.debug.inspector import EpisodeInspector
-    from shop_rlve.server.openenv import ShopRLVEEnv
-    from shop_rlve.training.rollout import DummyModelFn, run_rollout
+    from ecom_rlve.debug.inspector import EpisodeInspector
+    from ecom_rlve.server.openenv import EcomRLVEEnv
+    from ecom_rlve.training.rollout import DummyModelFn, run_rollout
 
     console.print(
         f"[bold cyan]Running episode[/bold cyan] "
@@ -162,7 +162,7 @@ def cmd_episode(args: argparse.Namespace) -> None:
         f"seed=[bold]{args.seed}[/bold]"
     )
 
-    env = ShopRLVEEnv(collection="C8", seed=args.seed)
+    env = EcomRLVEEnv(collection="C8", seed=args.seed)
     env.dump_dir = ""
     if args.verbose:
         env.trace_episodes = True
@@ -193,7 +193,7 @@ def cmd_episode(args: argparse.Namespace) -> None:
 
 def cmd_difficulty(args: argparse.Namespace) -> None:
     """Show difficulty parameter table for a range of d values."""
-    from shop_rlve.difficulty.mapping import map_difficulty
+    from ecom_rlve.difficulty.mapping import map_difficulty
 
     parts = args.range.split("-")
     d_min = int(parts[0])
@@ -241,12 +241,12 @@ def cmd_difficulty(args: argparse.Namespace) -> None:
 
 def cmd_smoke_test(args: argparse.Namespace) -> None:
     """Quick test that all 8 envs can reset+step without crashing."""
-    from shop_rlve.server.openenv import ShopRLVEEnv
-    from shop_rlve.training.collections import COLLECTIONS
+    from ecom_rlve.server.openenv import EcomRLVEEnv
+    from ecom_rlve.training.collections import COLLECTIONS
 
     console.print("[bold cyan]Smoke Test: all 8 environments[/bold cyan]")
 
-    env = ShopRLVEEnv(collection="C8", seed=42)
+    env = EcomRLVEEnv(collection="C8", seed=42)
     env.dump_dir = ""
 
     all_env_ids = COLLECTIONS["C8"]
@@ -300,7 +300,7 @@ def cmd_smoke_test(args: argparse.Namespace) -> None:
 def main() -> None:
     """Entry point for the debug CLI."""
     parser = argparse.ArgumentParser(
-        description="ShopRLVE Debug CLI",
+        description="EcomRLVE Debug CLI",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )

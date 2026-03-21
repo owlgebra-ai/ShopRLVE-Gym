@@ -1,0 +1,980 @@
+{
+  "policies": [
+    {
+      "rule_id": "pol_001",
+      "title": "Return window for electronics",
+      "category": "returns",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "electronics"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 15
+    },
+    {
+      "rule_id": "pol_002",
+      "title": "Return window for clothing",
+      "category": "returns",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "clothing"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 30
+    },
+    {
+      "rule_id": "pol_003",
+      "title": "Return window for furniture",
+      "category": "returns",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "furniture"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 30
+    },
+    {
+      "rule_id": "pol_004",
+      "title": "Return window for groceries",
+      "category": "returns",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "groceries"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 0
+    },
+    {
+      "rule_id": "pol_005",
+      "title": "Return window for jewelry",
+      "category": "returns",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "jewelry"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 30
+    },
+    {
+      "rule_id": "pol_006",
+      "title": "Return window for books",
+      "category": "returns",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "books"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 14
+    },
+    {
+      "rule_id": "pol_007",
+      "title": "Return window for toys",
+      "category": "returns",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "toys"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 30
+    },
+    {
+      "rule_id": "pol_008",
+      "title": "Return window for sports",
+      "category": "returns",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "sports"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 30
+    },
+    {
+      "rule_id": "pol_009",
+      "title": "Return window for beauty",
+      "category": "returns",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "beauty"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 14
+    },
+    {
+      "rule_id": "pol_010",
+      "title": "Return window for automotive",
+      "category": "returns",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "automotive"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 15
+    },
+    {
+      "rule_id": "pol_011",
+      "title": "Return fee for mail returns",
+      "category": "returns",
+      "conditions": [
+        {
+          "field": "return_method",
+          "op": "eq",
+          "value": "mail"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 5.99
+    },
+    {
+      "rule_id": "pol_012",
+      "title": "Return fee for in-store returns",
+      "category": "returns",
+      "conditions": [
+        {
+          "field": "return_method",
+          "op": "eq",
+          "value": "in_store"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 0.0
+    },
+    {
+      "rule_id": "pol_013",
+      "title": "Return fee for pickup returns",
+      "category": "returns",
+      "conditions": [
+        {
+          "field": "return_method",
+          "op": "eq",
+          "value": "pickup"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 0.0
+    },
+    {
+      "rule_id": "pol_014",
+      "title": "Free mail returns for premium members",
+      "category": "returns",
+      "conditions": [
+        {
+          "field": "return_method",
+          "op": "eq",
+          "value": "mail"
+        },
+        {
+          "field": "membership_tier",
+          "op": "eq",
+          "value": "premium"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 0.0
+    },
+    {
+      "rule_id": "pol_015",
+      "title": "Free shipping threshold for non-members",
+      "category": "shipping",
+      "conditions": [
+        {
+          "field": "membership_tier",
+          "op": "eq",
+          "value": "none"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 50.0
+    },
+    {
+      "rule_id": "pol_016",
+      "title": "Free shipping threshold for basic members",
+      "category": "shipping",
+      "conditions": [
+        {
+          "field": "membership_tier",
+          "op": "eq",
+          "value": "basic"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 35.0
+    },
+    {
+      "rule_id": "pol_017",
+      "title": "Free shipping threshold for premium members",
+      "category": "shipping",
+      "conditions": [
+        {
+          "field": "membership_tier",
+          "op": "eq",
+          "value": "premium"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 0.0
+    },
+    {
+      "rule_id": "pol_018",
+      "title": "Standard shipping cost",
+      "category": "shipping",
+      "conditions": [
+        {
+          "field": "shipping_method",
+          "op": "eq",
+          "value": "standard"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 7.99
+    },
+    {
+      "rule_id": "pol_019",
+      "title": "Express shipping cost",
+      "category": "shipping",
+      "conditions": [
+        {
+          "field": "shipping_method",
+          "op": "eq",
+          "value": "express"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 14.99
+    },
+    {
+      "rule_id": "pol_020",
+      "title": "Overnight shipping cost",
+      "category": "shipping",
+      "conditions": [
+        {
+          "field": "shipping_method",
+          "op": "eq",
+          "value": "overnight"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 24.99
+    },
+    {
+      "rule_id": "pol_021",
+      "title": "Standard shipping delivery time",
+      "category": "shipping",
+      "conditions": [
+        {
+          "field": "shipping_method",
+          "op": "eq",
+          "value": "standard"
+        }
+      ],
+      "answer_type": "categorical",
+      "answer": "5-7 business days"
+    },
+    {
+      "rule_id": "pol_022",
+      "title": "Express shipping delivery time",
+      "category": "shipping",
+      "conditions": [
+        {
+          "field": "shipping_method",
+          "op": "eq",
+          "value": "express"
+        }
+      ],
+      "answer_type": "categorical",
+      "answer": "2-3 business days"
+    },
+    {
+      "rule_id": "pol_023",
+      "title": "Overnight shipping delivery time",
+      "category": "shipping",
+      "conditions": [
+        {
+          "field": "shipping_method",
+          "op": "eq",
+          "value": "overnight"
+        }
+      ],
+      "answer_type": "categorical",
+      "answer": "Next business day"
+    },
+    {
+      "rule_id": "pol_024",
+      "title": "Free express shipping for premium members on orders over $100",
+      "category": "shipping",
+      "conditions": [
+        {
+          "field": "membership_tier",
+          "op": "eq",
+          "value": "premium"
+        },
+        {
+          "field": "order_total",
+          "op": "gte",
+          "value": 100.0
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 0.0
+    },
+    {
+      "rule_id": "pol_025",
+      "title": "Heavy item shipping surcharge for furniture over 50 lbs",
+      "category": "shipping",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "furniture"
+        },
+        {
+          "field": "weight_lbs",
+          "op": "gt",
+          "value": 50
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 29.99
+    },
+    {
+      "rule_id": "pol_026",
+      "title": "International standard shipping cost",
+      "category": "shipping",
+      "conditions": [
+        {
+          "field": "shipping_method",
+          "op": "eq",
+          "value": "standard"
+        },
+        {
+          "field": "destination",
+          "op": "eq",
+          "value": "international"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 19.99
+    },
+    {
+      "rule_id": "pol_027",
+      "title": "Alaska/Hawaii shipping surcharge",
+      "category": "shipping",
+      "conditions": [
+        {
+          "field": "destination",
+          "op": "in",
+          "value": [
+            "alaska",
+            "hawaii"
+          ]
+        },
+        {
+          "field": "shipping_method",
+          "op": "eq",
+          "value": "standard"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 9.99
+    },
+    {
+      "rule_id": "pol_028",
+      "title": "Price match window for in-store purchases",
+      "category": "pricing",
+      "conditions": [
+        {
+          "field": "purchase_channel",
+          "op": "eq",
+          "value": "in_store"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 14
+    },
+    {
+      "rule_id": "pol_029",
+      "title": "Price match window for online purchases",
+      "category": "pricing",
+      "conditions": [
+        {
+          "field": "purchase_channel",
+          "op": "eq",
+          "value": "online"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 7
+    },
+    {
+      "rule_id": "pol_030",
+      "title": "Price match eligible for electronics from authorized retailers",
+      "category": "pricing",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "electronics"
+        },
+        {
+          "field": "competitor_type",
+          "op": "eq",
+          "value": "authorized_retailer"
+        }
+      ],
+      "answer_type": "categorical",
+      "answer": "eligible"
+    },
+    {
+      "rule_id": "pol_031",
+      "title": "Price match ineligible for marketplace sellers",
+      "category": "pricing",
+      "conditions": [
+        {
+          "field": "competitor_type",
+          "op": "eq",
+          "value": "marketplace"
+        },
+        {
+          "field": "cat",
+          "op": "neq",
+          "value": "electronics"
+        }
+      ],
+      "answer_type": "categorical",
+      "answer": "ineligible"
+    },
+    {
+      "rule_id": "pol_032",
+      "title": "5% bulk discount for 10+ identical items",
+      "category": "pricing",
+      "conditions": [
+        {
+          "field": "quantity",
+          "op": "gte",
+          "value": 10
+        },
+        {
+          "field": "quantity",
+          "op": "lt",
+          "value": 25
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 5
+    },
+    {
+      "rule_id": "pol_033",
+      "title": "10% bulk discount for 25+ identical items",
+      "category": "pricing",
+      "conditions": [
+        {
+          "field": "quantity",
+          "op": "gte",
+          "value": 25
+        },
+        {
+          "field": "quantity",
+          "op": "lt",
+          "value": 100
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 10
+    },
+    {
+      "rule_id": "pol_034",
+      "title": "15% bulk discount for 100+ identical items",
+      "category": "pricing",
+      "conditions": [
+        {
+          "field": "quantity",
+          "op": "gte",
+          "value": 100
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 15
+    },
+    {
+      "rule_id": "pol_035",
+      "title": "Maximum coupons per order",
+      "category": "pricing",
+      "conditions": [
+        {
+          "field": "order_type",
+          "op": "eq",
+          "value": "standard"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 2
+    },
+    {
+      "rule_id": "pol_036",
+      "title": "Coupons not applicable on clearance items",
+      "category": "pricing",
+      "conditions": [
+        {
+          "field": "item_status",
+          "op": "eq",
+          "value": "clearance"
+        },
+        {
+          "field": "coupon_type",
+          "op": "eq",
+          "value": "percentage"
+        }
+      ],
+      "answer_type": "categorical",
+      "answer": "not_applicable"
+    },
+    {
+      "rule_id": "pol_037",
+      "title": "Student discount on electronics",
+      "category": "pricing",
+      "conditions": [
+        {
+          "field": "customer_type",
+          "op": "eq",
+          "value": "student"
+        },
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "electronics"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 10
+    },
+    {
+      "rule_id": "pol_038",
+      "title": "Employee discount percentage",
+      "category": "pricing",
+      "conditions": [
+        {
+          "field": "customer_type",
+          "op": "eq",
+          "value": "employee"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 20
+    },
+    {
+      "rule_id": "pol_039",
+      "title": "Open-box item discount",
+      "category": "pricing",
+      "conditions": [
+        {
+          "field": "item_condition",
+          "op": "eq",
+          "value": "open_box"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 15
+    },
+    {
+      "rule_id": "pol_040",
+      "title": "Basic membership annual fee",
+      "category": "membership",
+      "conditions": [
+        {
+          "field": "membership_tier",
+          "op": "eq",
+          "value": "basic"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 29.99
+    },
+    {
+      "rule_id": "pol_041",
+      "title": "Premium membership annual fee",
+      "category": "membership",
+      "conditions": [
+        {
+          "field": "membership_tier",
+          "op": "eq",
+          "value": "premium"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 99.99
+    },
+    {
+      "rule_id": "pol_042",
+      "title": "Basic member points per dollar spent",
+      "category": "membership",
+      "conditions": [
+        {
+          "field": "membership_tier",
+          "op": "eq",
+          "value": "basic"
+        },
+        {
+          "field": "purchase_channel",
+          "op": "eq",
+          "value": "online"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 1
+    },
+    {
+      "rule_id": "pol_043",
+      "title": "Premium member points per dollar spent",
+      "category": "membership",
+      "conditions": [
+        {
+          "field": "membership_tier",
+          "op": "eq",
+          "value": "premium"
+        },
+        {
+          "field": "purchase_channel",
+          "op": "eq",
+          "value": "online"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 3
+    },
+    {
+      "rule_id": "pol_044",
+      "title": "Premium member free returns",
+      "category": "membership",
+      "conditions": [
+        {
+          "field": "membership_tier",
+          "op": "eq",
+          "value": "premium"
+        }
+      ],
+      "answer_type": "categorical",
+      "answer": "Free returns on all items via any method"
+    },
+    {
+      "rule_id": "pol_045",
+      "title": "Premium member priority shipping",
+      "category": "membership",
+      "conditions": [
+        {
+          "field": "membership_tier",
+          "op": "eq",
+          "value": "premium"
+        }
+      ],
+      "answer_type": "categorical",
+      "answer": "Free 2-day shipping on all orders"
+    },
+    {
+      "rule_id": "pol_046",
+      "title": "Basic to premium upgrade spending requirement",
+      "category": "membership",
+      "conditions": [
+        {
+          "field": "membership_tier",
+          "op": "eq",
+          "value": "basic"
+        },
+        {
+          "field": "annual_spend",
+          "op": "gte",
+          "value": 500
+        }
+      ],
+      "answer_type": "categorical",
+      "answer": "Eligible for complimentary premium upgrade"
+    },
+    {
+      "rule_id": "pol_047",
+      "title": "Membership cancellation refund policy",
+      "category": "membership",
+      "conditions": [
+        {
+          "field": "days_since_signup",
+          "op": "lte",
+          "value": 30
+        }
+      ],
+      "answer_type": "categorical",
+      "answer": "Full refund within 30 days of signup"
+    },
+    {
+      "rule_id": "pol_048",
+      "title": "Guest checkout order limit",
+      "category": "membership",
+      "conditions": [
+        {
+          "field": "membership_tier",
+          "op": "eq",
+          "value": "none"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 500.0
+    },
+    {
+      "rule_id": "pol_049",
+      "title": "Premium member birthday bonus points",
+      "category": "membership",
+      "conditions": [
+        {
+          "field": "membership_tier",
+          "op": "eq",
+          "value": "premium"
+        },
+        {
+          "field": "is_birthday_month",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 500
+    },
+    {
+      "rule_id": "pol_050",
+      "title": "Standard warranty for electronics",
+      "category": "warranty",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "electronics"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 12
+    },
+    {
+      "rule_id": "pol_051",
+      "title": "Standard warranty for furniture",
+      "category": "warranty",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "furniture"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 24
+    },
+    {
+      "rule_id": "pol_052",
+      "title": "Standard warranty for appliances",
+      "category": "warranty",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "appliances"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 12
+    },
+    {
+      "rule_id": "pol_053",
+      "title": "Standard warranty for clothing",
+      "category": "warranty",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "clothing"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 3
+    },
+    {
+      "rule_id": "pol_054",
+      "title": "Standard warranty for jewelry",
+      "category": "warranty",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "jewelry"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 6
+    },
+    {
+      "rule_id": "pol_055",
+      "title": "Standard warranty for toys",
+      "category": "warranty",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "toys"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 6
+    },
+    {
+      "rule_id": "pol_056",
+      "title": "Standard warranty for sports",
+      "category": "warranty",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "sports"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 6
+    },
+    {
+      "rule_id": "pol_057",
+      "title": "Standard warranty for automotive",
+      "category": "warranty",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "automotive"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 12
+    },
+    {
+      "rule_id": "pol_058",
+      "title": "Extended warranty cost for electronics under $200",
+      "category": "warranty",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "electronics"
+        },
+        {
+          "field": "price",
+          "op": "lt",
+          "value": 200
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 19.99
+    },
+    {
+      "rule_id": "pol_059",
+      "title": "Extended warranty cost for electronics $200-$500",
+      "category": "warranty",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "electronics"
+        },
+        {
+          "field": "price",
+          "op": "gte",
+          "value": 200
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 49.99
+    },
+    {
+      "rule_id": "pol_060",
+      "title": "Extended warranty cost for furniture over $500",
+      "category": "warranty",
+      "conditions": [
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "furniture"
+        },
+        {
+          "field": "price",
+          "op": "gte",
+          "value": 500
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 79.99
+    },
+    {
+      "rule_id": "pol_061",
+      "title": "Premium member bonus warranty months for electronics",
+      "category": "warranty",
+      "conditions": [
+        {
+          "field": "membership_tier",
+          "op": "eq",
+          "value": "premium"
+        },
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "electronics"
+        }
+      ],
+      "answer_type": "numeric",
+      "answer": 6
+    },
+    {
+      "rule_id": "pol_062",
+      "title": "Accidental damage protection for premium members on electronics over $100",
+      "category": "warranty",
+      "conditions": [
+        {
+          "field": "membership_tier",
+          "op": "eq",
+          "value": "premium"
+        },
+        {
+          "field": "cat",
+          "op": "eq",
+          "value": "electronics"
+        },
+        {
+          "field": "price",
+          "op": "gte",
+          "value": 100
+        }
+      ],
+      "answer_type": "categorical",
+      "answer": "Included free for 12 months"
+    }
+  ]
+}
